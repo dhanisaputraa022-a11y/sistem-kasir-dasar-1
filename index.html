@@ -1,0 +1,55 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Kasir Dasar</title>
+</head>
+<body>
+    <h2>Sistem Kasir Dasar</h2>
+
+    <label>Total Belanja (Rp):</label><br>
+    <input type="number" id="belanja" min="0" placeholder="Masukkan total belanja">
+    <br><br>
+
+    <label>Uang Pembayaran (Rp):</label><br>
+    <input type="number" id="pembayaran" min="0" placeholder="Masukkan uang pembayaran">
+    <br><br>
+
+    <button onclick="hitungKasir()">Hitung</button>
+
+    <h3 id="hasil"></h3>
+
+    <script>
+        function hitungKasir() {
+            const belanja = Number(document.getElementById("belanja").value);
+            const pembayaranInput = document.getElementById("pembayaran").value;
+            const pembayaran = Number(pembayaranInput);
+            const hasil = document.getElementById("hasil");
+
+            if (
+                document.getElementById("belanja").value === "" ||
+                pembayaranInput === "" ||
+                belanja < 0 ||
+                pembayaran < 0
+            ) {
+                hasil.textContent = "Masukkan nominal yang valid!";
+                return;
+            }
+
+            if (pembayaran < belanja) {
+                const kurang = belanja - pembayaran;
+                hasil.textContent =
+                    "Pembayaran kurang: Rp " +
+                    kurang.toLocaleString("id-ID");
+            } else {
+                const kembalian = pembayaran - belanja;
+                hasil.textContent =
+                    "Transaksi berhasil! Kembalian: Rp " +
+                    kembalian.toLocaleString("id-ID");
+            }
+        }
+    </script>
+</body>
+</html>
